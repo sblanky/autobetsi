@@ -1,6 +1,7 @@
 import glob
 import betsi.lib as bl
 from os.path import exists
+from os import mkdir
 import pandas as pd
 
 
@@ -21,6 +22,9 @@ def analyse_file(
     output_dir: str = './betsi/',
     **kwargs,
 ):
+    if not exists(output_dir):
+        mkdir(ouput_dir)
+
     try:
         bl.analyse_file(
             file,
@@ -87,10 +91,13 @@ def analyse_directory(
     files_exception = []
     exception = []
     for file in files:
+        print(f'first analysis of {file}')
         e = analyse_file(file, output_dir, **kwargs)
         if e is not None:
             e.append(exception)
             files_exception.append(file)
+        else:
+            print(f'success!\n')
 
     return {
         'files': files_exception,
