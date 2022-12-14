@@ -22,3 +22,7 @@ Sessionx.vim
 tags
 # Persistent undo
 [._]*.un~
+
+#results_data
+./betsi/
+betsi_results.csv

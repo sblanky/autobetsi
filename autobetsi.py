@@ -139,19 +139,20 @@ if __name__ == "__main__":
               'use_rouq5': False
              }
 
-    print(pd.DataFrame.from_dict(tabulate_results(), orient='index'))
-
-    """
     files_exception = analyse_directory(
-        output_dir='./betsi_new/',
         **kwargs
-    )
+    ) # initial attempt to analyse. Failures added to list
 
     for file in files_exception['files']:
         analyse_reduce_accuracy(
             file,
             'min_num_points', [9, 8, 7, 6, 5]
             **kwargs
-        )
+        ) # Reattempt failed files with incrementally reducing number of points 
 
-    """
+    results = pd.DataFrame.from_dict( 
+        tabulate_results(),
+        orient='index'
+    )
+
+    results.to_csv('./betsi_results.csv')
