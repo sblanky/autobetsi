@@ -24,6 +24,43 @@ from os import mkdir
 import pandas as pd
 
 
+def strictly_increasing(List):
+    increasing = [x < y for x, y in zip(List, List[1:])]
+    increasing.append(increasing[-1])
+    return increasing
+
+
+def clean_isotherms(
+    input_dir: str = './csv/',
+    output_dir: str = './csv_clean/'
+):
+    print(f'Cleaning isotherms in {input_dir} and placing in {output_dir}...')
+    if not exists(output_dir):
+        mkdir(output_dir)
+
+    files = glob.glob(f'{input_dir}*.csv')
+    for f in files:
+        isotherm = pd.read_csv(
+            f,
+            names=['relative_pressure', 'loading'],
+            header=0,
+        )
+
+        relative_pressure = isotherm['relative_pressure'].to_list()
+        increasing = strictly_increasing(relative_pressure)
+        isotherm = isotherm.assign(increasing=increasing)
+        isotherm = isotherm[isotherm.increasing == True]
+        isotherm = isotherm.drop(columns=['increasing'])
+
+        isotherm.to_csv(
+            f'{output_dir}{f.split(input_dir)[1]}',
+            index=False,
+        )
+
+    print(f'...{len(files)} cleaned and saved in {output_dir}')
+
+    return output_dir
+
 
 def check_analysed(
     file: str,
@@ -114,7 +151,8 @@ def analyse_directory(
         print(f'first analysis of {file}')
         e = analyse_file(file, output_dir, **kwargs)
         if e is not None:
-            e.append(exception)
+            print(e)
+            exception.append(e)
             files_exception.append(file)
         else:
             print(f'success!\n')
@@ -137,24 +175,23 @@ def analyse_reduce_accuracy(
     if not exists(file):
         return
 
-    print(f'Attempting analysis of {file} with {parameter} between'
-          f'{min(steps)}, and {max(steps)}.'
-          f'-------------------------------'
+    print(f'Attempting analysis of {file} with {parameter} between '
+          f'{max(steps)}, and {min(steps)}. '
+          f'\n-------------------------------'
          )
     for s in steps:
         kwargs[parameter] = s
-        try:
-            analyse_file(file, **kwargs)
-        except AssertionError as a:
-            print(f'{parameter} = \t{s} \t{a}')
-            continue
-        except Exception as e:
-            print(f'{parameter} = \t{s} \t{e}')
-            continue
-        print(f'{parameter} = \t{s} SUCCESS!')
+        e = analyse_file(file, **kwargs)
+        if e is not None:
+            print(f'{parameter} =\t{s}\t{e}')
+        else:
+            print(f'{parameter} =\t{s}\tSUCCESS!')
+            break
 
 
 def run():
+    input_dir = clean_isotherms()
+
     kwargs = {
               'max_perc_error': 20.0,
               'min_num_pts': 10,
@@ -167,17 +204,18 @@ def run():
              }
 
     files_exception = analyse_directory(
-        **kwargs
-    ) # initial attempt to analyse. Failures added to list
+        input_dir,
+        **kwargs,
+    )  # initial attempt to analyse. Failures added to list
 
     for file in files_exception['files']:
         analyse_reduce_accuracy(
             file,
-            'min_num_points', [9, 8, 7, 6, 5],
+            'min_num_points', [9, 8, 7, 6, 5, 4, 3],
             **kwargs
-        ) # Reattempt failed files with incrementally reducing number of points 
+        )  # Reattempt failed files with incrementally reducing number of points
 
-    results = pd.DataFrame.from_dict( 
+    results = pd.DataFrame.from_dict(
         tabulate_results(),
         orient='index',
     )
