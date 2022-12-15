@@ -1,9 +1,10 @@
-Development of automatic application of betsi to a directory of isotherms (`.csv`). 
+Development of automatic application of betsi to a directory of isotherms (`.csv`). Hopes to make use of [betsi](https://github.com/nakulrampal/betsi-gui) more convenient. Works on Linux, (Rocky Linux 9.1 (Blue Onyx) x86_64) no idea on other systems. I hope it is useful to the adsorption community. 
 
 # Installation
 
-- Follow instructions to install [betsi-gui](https://github.com/nakulrampal/betsi-gui) in a virtual environment.
-- clone this repo
+- Follow instructions to install [betsi-gui](https://github.com/nakulrampal/betsi-gui) in a conda virtual environment.
+- Activate venv.
+- clone this repo.
 - `cd` into the cloned repo, and do `pip install .`
 
 # Basic use
