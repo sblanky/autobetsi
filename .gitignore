@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Build
+autobetsi.egg-info/*
+build/*
+
 # Swap
 [._]*.s[a-v][a-z]
 !*.svg  # comment out if you don't need vector files
@@ -24,5 +28,5 @@ tags
 [._]*.un~
 
 #results_data
-betsi/*
-betsi_results.csv
+autobetsi/betsi/*
+autobetsi/betsi_results.csv

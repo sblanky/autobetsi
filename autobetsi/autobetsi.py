@@ -134,7 +134,7 @@ def analyse_reduce_accuracy(
         print(f'{parameter} = \t{s} SUCCESS!')
 
 
-def main():
+def run():
     kwargs = {
               'max_perc_error': 20.0,
               'min_num_pts': 10,
@@ -164,5 +164,6 @@ def main():
 
     results.to_csv('./betsi_results.csv')
 
+
 if __name__ == "__main__":
-    main()
+    run()
