@@ -34,9 +34,9 @@ The functions in `autobetsi.py` can be imported and used in further scripts.
 
 # TODO
 
-- `betsi` is picky about isotherms. Make cleaning/conversion function.
+- `betsi` is picky about isotherms. ~~Make cleaning/conversion function.~~ Expand cleaning function!
 - Allow use of tags from commandline.
-- Silence `betsi`'s warnings from `seaborn`, `matplotlib` etc.
+- ~~Silence `betsi`'s warnings from `seaborn`, `matplotlib` etc.~~
 - Give up less hard; standard autobetsi to try combinations of iteratively looser parameters instead of just reducing `'min_num_points'`. Requires logical progression, and minimum strictness.
 
 

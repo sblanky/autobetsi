@@ -22,6 +22,7 @@ import betsi.lib as bl
 from os.path import exists
 from os import mkdir
 import pandas as pd
+import warnings
 
 
 def strictly_increasing(List):
@@ -83,11 +84,13 @@ def analyse_file(
         mkdir(ouput_dir)
 
     try:
-        bl.analyse_file(
-            file,
-            output_dir,
-            **kwargs
-        )
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            bl.analyse_file(
+                file,
+                output_dir,
+                **kwargs
+            )
 
     except Exception as e:
         return e
