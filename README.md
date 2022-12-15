@@ -1,4 +1,4 @@
-Development of automatic application of betsi to a directory of isotherms (`.csv`). Hopes to make use of [betsi](https://github.com/nakulrampal/betsi-gui) more convenient. Works on Linux, (Rocky Linux 9.1 (Blue Onyx) x86_64) no idea on other systems. I hope it is useful to the adsorption community. 
+Development of automatic application of betsi[^1] to a directory of isotherms (`.csv`). Hopes to make use of [betsi](https://github.com/nakulrampal/betsi-gui) more convenient. Works on Linux, (Rocky Linux 9.1 (Blue Onyx) x86_64) no idea on other systems. I hope it is useful to the adsorption community. 
 
 # Installation
 
@@ -26,6 +26,8 @@ If an isotherm throws an exception, this typically means that a BET area cannot 
 
 Finally, for convenience results are tabulated for each analysis present in `./betsi/` 
 
+You can test it on isotherms in [`./autobetsi/csv/`](./autobetsi/csv/). These are copied from [betsi-gui](https://github.com/nakulrampal/betsi-gui).
+
 # Advanced
 
 The functions in `autobetsi.py` can be imported and used in further scripts.
@@ -36,3 +38,5 @@ The functions in `autobetsi.py` can be imported and used in further scripts.
 - Allow use of tags from commandline.
 - Silence `betsi`'s warnings from `seaborn`, `matplotlib` etc.
 
+
+[^1] Osterrieth, Johannes WM, James Rampersad, David Madden, Nakul Rampal, Luka Skoric, Bethany Connolly, Mark D. Allendorf et al. "How reproducible are surface areas calculated from the BET equation?." _Advanced Materials_ (2022): 2201502.
