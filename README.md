@@ -38,6 +38,7 @@ The functions in `autobetsi.py` can be imported and used in further scripts.
 - Allow use of tags from commandline.
 - ~~Silence `betsi`'s warnings from `seaborn`, `matplotlib` etc.~~
 - Give up less hard; standard autobetsi to try combinations of iteratively looser parameters instead of just reducing `'min_num_points'`. Requires logical progression, and minimum strictness.
+- Threading ???
 
 
 [^1]: Osterrieth, Johannes WM, James Rampersad, David Madden, Nakul Rampal, Luka Skoric, Bethany Connolly, Mark D. Allendorf et al. "How reproducible are surface areas calculated from the BET equation?." _Advanced Materials_ (2022): 2201502.
