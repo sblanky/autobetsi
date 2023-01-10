@@ -113,6 +113,7 @@ def get_results_summary(
 def tabulate_results(
     output_dir: str = './betsi/'
 ):
+    print('tabulating results for convenience...')
     results_files = glob.glob(f'{output_dir}*.csv/results.txt')
     results_dict = {}
     for f in results_files:
@@ -189,7 +190,7 @@ def analyse_reduce_accuracy(
             print(f'{parameter} =\t{s}\t{e}')
         else:
             print(f'{parameter} =\t{s}\tSUCCESS!')
-            break
+            return True
 
 
 def run():
@@ -211,19 +212,28 @@ def run():
         **kwargs,
     )  # initial attempt to analyse. Failures added to list
 
+    kwargs['max_perc_error'] = 60
     for file in files_exception['files']:
-        analyse_reduce_accuracy(
+        points_success = analyse_reduce_accuracy(
             file,
-            'min_num_points', [9, 8, 7, 6, 5, 4, 3],
+            'min_num_points', [9, 8, 7, 6, 5,],
             **kwargs
         )  # Reattempt failed files with incrementally reducing number of points
+        if points_success is not True:
+            analyse_reduce_accuracy(
+                file,
+                'min_r2', [0.99, 0.98, 0.97, 0.96, 0.95],
+                **kwargs,
+            )
 
     results = pd.DataFrame.from_dict(
         tabulate_results(),
         orient='index',
     )
 
-    results.to_csv('./betsi_results.csv')
+    tabulated_out = './betsi_results.csv'
+    results.to_csv(tabulated_out)
+    print(f'...saved to {tabulated_out}')
 
 
 if __name__ == "__main__":
