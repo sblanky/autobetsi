@@ -81,7 +81,7 @@ def analyse_file(
     **kwargs,
 ):
     if not exists(output_dir):
-        mkdir(ouput_dir)
+        mkdir(output_dir)
 
     try:
         with warnings.catch_warnings():
