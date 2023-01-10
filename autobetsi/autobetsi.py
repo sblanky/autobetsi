@@ -194,6 +194,9 @@ def analyse_reduce_accuracy(
 
 
 def run():
+    from art import tprint
+    tprint(f'autobetsi\n')
+
     input_dir = clean_isotherms()
 
     kwargs = {
