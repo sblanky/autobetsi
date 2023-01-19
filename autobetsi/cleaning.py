@@ -37,6 +37,8 @@ def clean_isotherms(
             index=False,
         )
 
-    print(f'...{len(files)} cleaned and saved in {output_dir}')
+    print(
+        f'...{len(files)} cleaned and saved in {output_dir}\n\n'
+    )
 
     return output_dir

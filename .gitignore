@@ -28,5 +28,6 @@ tags
 [._]*.un~
 
 #results_data
+autobeti/csv_clean/*
 autobetsi/betsi/*
 autobetsi/betsi_results.csv

@@ -17,6 +17,8 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
+
+from time import sleep
 import glob
 import betsi.lib as bl
 from os.path import exists
@@ -94,23 +96,26 @@ def analyse_directory(
 ):
     files = glob.glob(f'{input_dir}*.csv')
 
-    print(f'analysing {len(files)} files in directory {input_dir} using parameters;\n'
+    print(f'{len(files)} files found in directory {input_dir}\n'
+          f'Initial analysis parameters\n'
           f'------------------------------------------'
          )
     for key, value in kwargs.items():
         print(f'{key: <20}{value}'
              )
     print(f'------------------------------------------')
+    sleep(2)
 
     if overwrite is False:
         analysed = [f for f in files if check_analysed(f, input_dir, output_dir)==True]
         files = [f for f in files if f not in analysed]
         if len(analysed) > 0:
-            print(f'Removing following {len(analysed)} files that are already analysed:')
+            print(f'\nRemoving following {len(analysed)} files that are already analysed:')
             print(*analysed, sep='\n')
-            print(f'If you wish to analyse these isotherms again, please '
-                  f'specify overwrite=True, or specify a differnt output_dir'
+            print('If you wish to analyse these isotherms again, please '
+                  'specify overwrite=True, or specify a different output_dir\n'
                  )
+            sleep(2)
 
     files_exception = []
     exception = []
@@ -122,7 +127,7 @@ def analyse_directory(
             exception.append(e)
             files_exception.append(file)
         else:
-            print(f'success!\n')
+            print('SUCCESS!\n')
 
     return {
         'files': files_exception,
@@ -158,9 +163,16 @@ def analyse_reduce_accuracy(
 
 def run():
     from art import tprint
-    tprint(f'autobetsi\n')
+
+    tprint('autobetsi\n')
+    print(
+        'Automatically applies betsi criteria to a group'
+        'of isotherms, and doesn\'t give up!\n\n'
+    )
+    sleep(1)
 
     input_dir = clean_isotherms()
+    sleep(1)
 
     kwargs = {
               'max_perc_error': 20.0,
@@ -172,11 +184,13 @@ def run():
               'use_rouq4': True,
               'use_rouq5': False
              }
+    sleep(1)
 
     files_exception = analyse_directory(
         input_dir,
         **kwargs,
     )  # initial attempt to analyse. Failures added to list
+    sleep(1)
 
     kwargs['max_perc_error'] = 60
     for file in files_exception['files']:
