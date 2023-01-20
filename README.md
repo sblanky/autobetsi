@@ -9,7 +9,7 @@ Development of automatic application of betsi[^1] to a directory of isotherms (w
 
 # Basic use
 
-Running `autobetsi` from the command line in a directory `.` runs `betsi` on the contents of `./csv/`. Initial parameters;
+Running `autobetsi` from the command line in a directory  runs `betsi` on the contents of that directory. Initial parameters;
 
 | Parameter		| Value		|
 | -------------------- 	| ------------- |
@@ -26,7 +26,7 @@ If an isotherm throws an exception, this typically means that a BET area cannot 
 
 Finally, for convenience results are tabulated for each analysis present in `./betsi/` 
 
-You can test it on isotherms in [`./csv/`](./autobetsi/csv/). These are copied from [betsi-gui](https://github.com/nakulrampal/betsi-gui).
+You can test it on isotherms in [`./csv/`](./csv/). These are copied from [betsi-gui](https://github.com/nakulrampal/betsi-gui).
 
 # Advanced
 
