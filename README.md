@@ -1,4 +1,4 @@
-Development of automatic application of betsi[^1] to a directory of isotherms (`.csv`). Hopes to make use of [betsi](https://github.com/nakulrampal/betsi-gui) more convenient. Works on Linux, (Rocky Linux 9.1 (Blue Onyx) x86_64) no idea on other systems. I hope it is useful to the adsorption community. 
+Development of automatic application of betsi[^1] to a directory of isotherms (working directory, `./`). Hopes to make use of [betsi](https://github.com/nakulrampal/betsi-gui) more convenient. Works on Linux, (Rocky Linux 9.1 (Blue Onyx) x86_64) no idea on other systems. I hope it is useful to the adsorption community. 
 
 # Installation
 
@@ -26,7 +26,7 @@ If an isotherm throws an exception, this typically means that a BET area cannot 
 
 Finally, for convenience results are tabulated for each analysis present in `./betsi/` 
 
-You can test it on isotherms in [`./autobetsi/csv/`](./autobetsi/csv/). These are copied from [betsi-gui](https://github.com/nakulrampal/betsi-gui).
+You can test it on isotherms in [`./csv/`](./autobetsi/csv/). These are copied from [betsi-gui](https://github.com/nakulrampal/betsi-gui).
 
 # Advanced
 

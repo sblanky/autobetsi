@@ -11,8 +11,8 @@ def strictly_increasing(List):
 
 
 def clean_isotherms(
-    input_dir: str = './csv/',
-    output_dir: str = './csv_clean/'
+    input_dir: str = './',
+    output_dir: str = './clean/'
 ):
     print(f'Cleaning isotherms in {input_dir} and placing in {output_dir}...')
     if not exists(output_dir):
@@ -20,6 +20,7 @@ def clean_isotherms(
 
     files = glob.glob(f'{input_dir}*.csv')
     for f in files:
+        print(f)
         isotherm = pd.read_csv(
             f,
             names=['relative_pressure', 'loading'],

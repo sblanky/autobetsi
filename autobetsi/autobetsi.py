@@ -30,7 +30,7 @@ from .cleaning import clean_isotherms
 
 def check_analysed(
     file: str,
-    input_dir: str = './csv/',
+    input_dir: str = '.',
     output_dir: str = './betsi/',
 ):
     filename = file.split(input_dir)[1]
@@ -89,7 +89,7 @@ def tabulate_results(
 
 
 def analyse_directory(
-    input_dir: str = './csv/',
+    input_dir: str = '.',
     output_dir: str = './betsi/',
     overwrite: bool = False,
     **kwargs,
@@ -186,8 +186,10 @@ def run():
              }
     sleep(1)
 
+    output_dir = './betsi/'
     files_exception = analyse_directory(
         input_dir,
+        output_dir,
         **kwargs,
     )  # initial attempt to analyse. Failures added to list
     sleep(1)
@@ -211,7 +213,7 @@ def run():
         orient='index',
     )
 
-    tabulated_out = './betsi_results.csv'
+    tabulated_out = f'./{output_dir}/betsi_results.csv'
     results.to_csv(tabulated_out)
     print(f'...saved to {tabulated_out}')
 

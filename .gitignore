@@ -31,3 +31,5 @@ tags
 autobeti/csv_clean/*
 autobetsi/betsi/*
 autobetsi/betsi_results.csv
+csv/clean/*
+csv/betsi/*
