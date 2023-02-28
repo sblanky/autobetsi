@@ -57,8 +57,11 @@ def analyse_file(
                 **kwargs
             )
 
-    except Exception as e:
+    except AssertionError as e:
         return e
+
+    except ValueError:
+        pass
 
 
 def get_results_summary(
@@ -141,7 +144,11 @@ def analyse_reduce_accuracy(
     steps: 'list[float]',
     **kwargs
 ):
-    if parameter not in ['min_r2', 'min_num_points', 'max_pc_error']:
+    if parameter not in [
+        'min_r2',
+        'min_num_points',
+        'max_pc_error'
+    ]:
         return
 
     if not exists(file):
