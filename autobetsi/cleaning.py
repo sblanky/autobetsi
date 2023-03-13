@@ -24,7 +24,6 @@ def clean_isotherms(
 
     files = glob.glob(f'{input_dir}*.csv')
     for f in files:
-        print(f)
         isotherm = pd.read_csv(
             f,
             names=['relative_pressure', 'loading'],
@@ -78,4 +77,25 @@ def convert_aif(
     if not exists(output_dir):
         mkdir(output_dir)
     df.to_csv(f'{output_dir}{name}.csv')
+
+    return name
+
+
+def convert_aif_dir(
+    input_dir: str = './',
+    output_dir: str = './csv/'
+):
+    aif_files = glob.glob(f'{input_dir}*.aif') + \
+    glob.glob(f'{input_dir}*.aiff')
+    if len(aif_files) > 0:
+        print(
+            f'{len(aif_files)} aif files found in {input_dir}. '
+            f'converting to csv for use in autobetsi.\n'
+        )
+    names = []
+    for file in glob.glob(input_dir):
+        name = convert_aif(file)
+        names.append(name)
+
+    return names
 

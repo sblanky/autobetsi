@@ -25,7 +25,7 @@ from os.path import exists
 from os import mkdir
 import pandas as pd
 import warnings
-from .cleaning import clean_isotherms, convert_aif
+from .cleaning import clean_isotherms, convert_aif_dir
 
 
 def check_analysed(
@@ -99,7 +99,7 @@ def analyse_directory(
 ):
     files = glob.glob(f'{input_dir}*.csv')
 
-    print(f'{len(files)} files found in directory {input_dir}\n'
+    print(f'{len(files)} files found in directory {input_dir}\n\n'
           f'Initial analysis parameters\n'
           f'------------------------------------------'
          )
@@ -176,8 +176,9 @@ def run():
         'Automatically applies betsi criteria to a group'
         'of isotherms, and doesn\'t give up!\n\n'
     )
-    for file in glob.glob('./*.aif'):
-        convert_aif(file, './')
+    sleep(1)
+
+    convert_aif_dir(output_dir='./')
 
     sleep(1)
 
