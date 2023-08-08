@@ -33,3 +33,7 @@ autobetsi/betsi/*
 autobetsi/betsi_results.csv
 csv/clean/*
 csv/betsi/*
+csv/autobetsi.yml
+csv/package-lock.json
+csv/render1674650005030.gif
+dist/
