@@ -110,7 +110,10 @@ def analyse_directory(
     sleep(2)
 
     if overwrite is False:
-        analysed = [f for f in files if check_analysed(f, input_dir, output_dir)==True]
+        analysed = [
+            f for f in files
+            if check_analysed(f, input_dir, output_dir)==True
+        ]
         files = [f for f in files if f not in analysed]
         if len(analysed) > 0:
             print(f'\nRemoving following {len(analysed)} files that are already analysed:')
@@ -178,11 +181,12 @@ def run():
     )
     sleep(1)
 
-    convert_aif_dir(output_dir='./')
+    converted, output_dir = convert_aif_dir()
 
     sleep(1)
 
-    input_dir = clean_isotherms()
+    input_dir = clean_isotherms(input_dir=output_dir)
+
     sleep(1)
 
     kwargs = {

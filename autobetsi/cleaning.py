@@ -3,10 +3,11 @@ from os import mkdir
 import os
 import pandas as pd
 import glob
-import pygaps.parsing as pgp
 import pandas as pd
 import warnings
 
+import pygaps.parsing as pgp
+from pygaps.utilities.exceptions import ParameterError
 
 def strictly_increasing(List):
     increasing = [x < y for x, y in zip(List, List[1:])]
@@ -59,7 +60,14 @@ def convert_aif(
 
     with warnings.catch_warnings():
         warnings.simplefilter('ignore')
-        isotherm = pgp.isotherm_from_aif(file)
+        try:
+            isotherm = pgp.isotherm_from_aif(file)
+        except ValueError as e:
+            print(f'{file} raised error when parsing into pyGAPS.')
+            print(e)
+        except ParameterError as e:
+            print(f'{file} is probably wrong version.')
+            print(e)
 
     pressure = isotherm.data_raw['pressure']
     loading = isotherm.data_raw['loading']
@@ -93,9 +101,9 @@ def convert_aif_dir(
             f'converting to csv for use in autobetsi.\n'
         )
     names = []
-    for file in glob.glob(input_dir):
+    for file in aif_files:
         name = convert_aif(file)
         names.append(name)
 
-    return names
+    return names, output_dir
 
