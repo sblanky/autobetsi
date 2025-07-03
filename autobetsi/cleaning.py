@@ -71,7 +71,10 @@ def convert_aif(
 
     pressure = isotherm.data_raw['pressure']
     loading = isotherm.data_raw['loading']
-    if 'pressure_saturation' in isotherm.data_raw:
+    if (
+        'pressure_saturation' in isotherm.data_raw and
+        isotherm.pressure_mode != 'relative'
+    ):
         pressure = pressure / \
         isotherm.data_raw['pressure_saturation']
 
